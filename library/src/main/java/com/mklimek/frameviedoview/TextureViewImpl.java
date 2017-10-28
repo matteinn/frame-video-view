@@ -135,8 +135,16 @@ class TextureViewImpl extends TextureView implements
 
     private void release() {
         if(mediaPlayer != null) {
-            mediaPlayer.stop();
-            mediaPlayer.release();
+            try {
+                mediaPlayer.stop();
+            }catch (IllegalStateException e){
+
+            }
+            try {
+                mediaPlayer.release();
+            }catch (IllegalStateException e){
+                
+            }
         }
         mediaPlayer = null;
         prepared = false;
